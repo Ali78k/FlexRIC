@@ -581,15 +581,14 @@ e2ap_msg_t e2ap_handle_e42_ric_control_request_xapp(e42_xapp_t* xapp, const e2ap
   byte_array_t ba_msg = e2ap_enc_e42_control_request_xapp(&xapp->ap,(  e42_ric_control_request_t* ) cr);
   defer({ free_byte_array(ba_msg) ;}; );
 
-  e2ap_send_bytes_xapp(&xapp->ep, ba_msg);
-
-  printf("[xApp]: CONTROL-REQUEST tx \n");
-
   pending_event_xapp_t ev = {.ev = E42_RIC_CONTROL_REQUEST_PENDING_EVENT,
     .id = cr->ctrl_req.ric_id,
     .wait_ms = 10000};
   add_pending_event_xapp(xapp, &ev);
 
+  e2ap_send_bytes_xapp(&xapp->ep, ba_msg);
+
+  printf("[xApp]: CONTROL-REQUEST tx \n");
 
   e2ap_msg_t ans = {.type = NONE_E2_MSG_TYPE};
   return ans;
