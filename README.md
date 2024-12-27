@@ -42,15 +42,8 @@ For more information, see this [Gist](https://gist.github.com/Ali78k/f24cbf65529
 This fork introduces the addition of the RSRP KPI to the xApp. The main differences can be found in the following files:
 
 - [`examples/emulator/agent/sm_kpm.c`](https://github.com/Ali78k/FlexRIC/blob/br-flexric/examples/emulator/agent/sm_kpm.c#L78-L92)
-- - [`conf_files/xapp_oran_sm.conf`](https://github.com/Ali78k/FlexRIC/blob/br-flexric/conf_files/xapp_oran_sm.conf#L34-L35)
--
-- Feel free to explore these changes to better understand the modifications and their impact.
--
-- ---
-- For any questions or further clarifications, please open an issue or contact the repository maintainer.
--
-````
-````
-```
-`
-````
+- [`conf_files/xapp_oran_sm.conf`](https://github.com/Ali78k/FlexRIC/blob/br-flexric/conf_files/xapp_oran_sm.conf#L34-L35)
+
+Feel free to explore these changes to better understand the modifications and their impact.
+---
+For any questions or further clarifications, please open an issue or contact the repository maintainer.
