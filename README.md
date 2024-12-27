@@ -18,7 +18,7 @@ To recompile the project, use the following commands:
 cmake clean ..
 make uninstall
 cmake -DCMAKE_C_COMPILER=gcc-12 -DXAPP_DB=MYSQL_XAPP ..
-make -j```nproc`
+make -j`nproc`
 make install
 ```
 
