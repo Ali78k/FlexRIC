@@ -75,6 +75,21 @@ static
   return fill_rnd_float_data();
 }
 
+// Function to Generate RSRP (Reference Signal Recieved Power) Value
+
+static
+meas_record_lst_t fill_RRU_RSRP(ue_id_e2sm_t const* ue)
+{
+    assert(ue != NULL);
+    meas_record_lst_t dst = {0};
+
+    dst.value = INTEGER_MEAS_VALUE;
+    // Generate a Random Value in Typical Range (-144 to -44 dBm)
+    dst.int_val = -140 + (rand() % 97);
+    return dst;
+}
+
+
 static
  meas_record_lst_t fill_RRU_PrbTotDl(ue_id_e2sm_t const* ue)
 {
@@ -147,6 +162,7 @@ const kv_measure_t lst_measure[] = {
   (kv_measure_t){.key = "CARR.PDSCHMCSDist.BinX.BinY.BinZ", .value = fill_PDSCHMCSDist_BinXYZ },
   (kv_measure_t){.key = "CARR.PUSCHMCSDist.BinX.BinY.BinZ", .value = fill_PUSCHMCSDist_BinXYZ },
   (kv_measure_t){.key = "CARR.MeanTxPwr", .value = fill_MeanTxPwr },
+  (kv_measure_t){.key = "RRU.RSRP", .value = fill_RRU_RSRP },// Added new measurement
   };
   // 3GPP TS 28.552
 
@@ -640,6 +656,12 @@ ric_report_style_item_t fill_ric_report_style_item(void)
   dst.act_def_format_type = FORMAT_4_ACTION_DEFINITION;
 
 
+  // Added "RRU.RSRP" to the list of KPM measurements for supported node types (gNB, gNB-DU, and eNB).
+  // This allows the specified nodes to report RSRP (Reference Signal Received Power) as part of their KPM messages.
+  // Note: Each node type supports a specific subset of measurements as defined in 3GPP TS 28.552.
+
+  
+
 #ifdef NGRAN_GNB
   // 3GPP TS 28.552
   const char* kpm_meas[] = {
@@ -650,6 +672,7 @@ ric_report_style_item_t fill_ric_report_style_item(void)
     "DRB.UEThpUl",
     "RRU.PrbTotDl",
     "RRU.PrbTotUl",
+    "RRU.RSRP", // Added RSRP KPI
   };
 #elif defined NGRAN_GNB_CU
   const char* kpm_meas[] = {
@@ -670,6 +693,7 @@ ric_report_style_item_t fill_ric_report_style_item(void)
     "DRB.PdcpSduVolumeUL",
     "RRU.PrbTotDl",
     "RRU.PrbTotUl",
+    "RRU.RSRP", //Added RSRP KPI
   };
 #else
   _Static_assert(0!=0, "Unknown node type");
